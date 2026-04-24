@@ -1,33 +1,43 @@
 # Medical Image Classification using AWS SageMaker
 
-This repository demonstrates an end-to-end Machine Learning pipeline developed on AWS SageMaker for medical image classification. The project covers data ingestion, hyperparameter tuning, model training with debugging/profiling, and deployment to a real-time endpoint.
+This repository demonstrates an end-to-end Machine Learning pipeline developed on AWS SageMaker for medical image classification. The project focuses on detecting Pneumonia from X-ray images using advanced cloud-native tools and Deep Learning.
 
 ## 📁 Project Structure
 
-* **`Untitled.ipynb`**: Main Jupyter Notebook containing data orchestration, training jobs, and deployment.
-* **`hpo.py`**: Training script optimized for SageMaker (Hyperparameter Optimization).
-* **`Model_Performance_Report.pdf`**: Comprehensive report detailing model architecture and tuning results.
-* **`performance_metrics.png`**: Visualization of the hyperparameter tuning performance and loss reduction.
+* **`Untitled.ipynb`**: The main driver notebook containing data orchestration, training jobs, and deployment logic.
+* **`hpo.py`**: A specialized training script optimized for SageMaker Hyperparameter Optimization (HPO).
+* **`Model_Performance_Report.pdf`**: Detailed documentation of the model architecture, tuning results, and infrastructure setup.
+* **`performance_metrics.png`**: Visualization of the hyperparameter tuning process and loss convergence.
+* **`inference_results.png`**: Sample predictions from the deployed endpoint showing the model's performance on real medical data.
 
-## 🚀 Overview
-The project uses **Transfer Learning** with a pre-trained **ResNet18** model to classify medical images (Pneumonia detection) from X-ray data.
+## 🚀 Project Highlights
 
-### ⚙️ Hyperparameter Tuning (HPO)
-I utilized SageMaker's Hyperparameter Tuner to find the optimal settings:
-- **Search Space**: 
-  - Learning Rate: Logarithmic range [0.001, 0.1]
-  - Batch Size: [2, 4, 8]
-- **Best Result**: The most accurate model was achieved with a **Learning Rate of 0.001** and a **Batch Size of 2**, reaching a Final Objective Value (Loss) of **0.3693**.
+### 🧠 Model Architecture & Transfer Learning
+The project utilizes **Transfer Learning** with a pre-trained **ResNet18** model. By fine-tuning the final layers, the model was adapted to classify medical images with high precision while reducing training time and computational costs.
 
-![Performance Metrics](performance_metrics.png)
+### ⚙️ Hyperparameter Optimization (HPO)
+I leveraged SageMaker’s automatic model tuning to find the best configuration:
+- **Best Learning Rate**: 0.001
+- **Best Batch Size**: 2
+- **Final Objective Value (Loss)**: 0.3693
 
-## 🛠️ Debugging & Profiling
-To ensure efficient training, I integrated **SageMaker Debugger and Profiler**:
-* **Monitoring**: Used `SMDebug` to track the loss curve in real-time.
-* **Profiling**: Monitored system utilization (CPU/GPU) to identify and resolve performance bottlenecks.
+![Training Performance](performance_metrics.png)
 
-## 🌐 Deployment
-The best-performing model was deployed to a real-time inference endpoint on an **`ml.m5.large`** instance, allowing for immediate predictions on new medical imaging data.
+### 🛠️ Debugging & Profiling
+To ensure a robust training process, I integrated **SageMaker Debugger and Profiler**:
+* **SMDebug**: Used to track loss curves and monitor for overfitting or vanishing gradients.
+* **Resource Monitoring**: Tracked CPU/GPU utilization to optimize instance performance.
+
+## 🌐 Real-Time Inference
+The model is deployed to a **SageMaker Endpoint** (`ml.m5.large`), providing a scalable interface for real-time clinical diagnosis. Below is a sample of the model's output where it correctly identifies "Normal" vs "Pneumonia" cases.
+
+![Inference Results](inference_results.png)
+
+## 📖 How to Run
+1. Open `Untitled.ipynb` in AWS SageMaker Studio.
+2. Update the S3 bucket paths with your dataset location.
+3. Execute the cells to trigger the training job and deploy the endpoint.
+4. Use the provided inference section to test new images.
 
 ---
 *Developed by Ghaida Alharbi*
