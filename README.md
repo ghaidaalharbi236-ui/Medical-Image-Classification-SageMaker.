@@ -33,11 +33,6 @@ The model is deployed to a **SageMaker Endpoint** (`ml.m5.large`), providing a s
 
 ![Inference Results](inference_results.png)
 
-## 📖 How to Run
-1. Open `Untitled.ipynb` in AWS SageMaker Studio.
-2. Update the S3 bucket paths with your dataset location.
-3. Execute the cells to trigger the training job and deploy the endpoint.
-4. Use the provided inference section to test new images.
 
 ---
 *Developed by Ghaida Alharbi*
